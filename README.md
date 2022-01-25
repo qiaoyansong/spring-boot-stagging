@@ -1,5 +1,5 @@
 # 项目简介
-这是一个springboot脚手架，用于快速的开发springboot项目
+这是一个springboot脚手架，用于快速的开发springboot项，整个项目使用的是log4j,springboot版本使用的是2.6.1
 # 项目工程结构如下：
 ```
 ├── api             定义对外的dubbo接口（在线业务调用）
