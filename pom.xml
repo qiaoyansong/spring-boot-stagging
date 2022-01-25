@@ -5,13 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.qiaoyansong</groupId>
-    <artifactId>spring-boot-stagging</artifactId>
+    <artifactId>spring-boot-stagging-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <spring-boot-stagging-assembly.version>1.0-SNAPSHOT</spring-boot-stagging-assembly.version>
     </properties>
 
+    <dependencyManagement>
+    </dependencyManagement>
+
+    <modules>
+        <module>test</module>
+        <module>api</module>
+        <module>starter</module>
+        <module>service</module>
+        <module>setting</module>
+    </modules>
 </project>
