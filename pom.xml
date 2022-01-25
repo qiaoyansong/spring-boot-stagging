@@ -24,5 +24,6 @@
         <module>starter</module>
         <module>service</module>
         <module>setting</module>
+        <module>dal</module>
     </modules>
 </project>
