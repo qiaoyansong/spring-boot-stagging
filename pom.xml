@@ -73,6 +73,11 @@
                 <artifactId>spring-boot-stagging-integration</artifactId>
                 <version>${spring-boot-stagging-parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-api</artifactId>
+                <version>${spring-boot-stagging-api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
