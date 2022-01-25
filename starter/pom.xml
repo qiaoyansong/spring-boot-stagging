@@ -36,6 +36,10 @@
             <groupId>com.qiaoyansong</groupId>
             <artifactId>spring-boot-stagging-setting</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.qiaoyansong</groupId>
+            <artifactId>spring-boot-stagging-service</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

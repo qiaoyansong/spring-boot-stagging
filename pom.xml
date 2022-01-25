@@ -58,6 +58,21 @@
                 <artifactId>spring-boot-stagging-common</artifactId>
                 <version>${spring-boot-stagging-parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-service</artifactId>
+                <version>${spring-boot-stagging-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-dal</artifactId>
+                <version>${spring-boot-stagging-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-integration</artifactId>
+                <version>${spring-boot-stagging-parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -70,5 +85,6 @@
         <module>dal</module>
         <module>integration</module>
         <module>common</module>
+        <module>biz</module>
     </modules>
 </project>
