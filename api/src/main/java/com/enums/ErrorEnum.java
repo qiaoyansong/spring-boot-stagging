@@ -1,4 +1,4 @@
-package enums;
+package com.enums;
 
 /**
  * @author ：Qiao Yansong
@@ -6,7 +6,7 @@ package enums;
  * description：错误码枚举
  */
 public enum ErrorEnum {
-    ;
+    INNER_ERROR(10001, "内部错误");
 
     /**
      * 错误代码

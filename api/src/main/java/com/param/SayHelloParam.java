@@ -1,4 +1,4 @@
-package param;
+package com.param;
 
 import lombok.Data;
 

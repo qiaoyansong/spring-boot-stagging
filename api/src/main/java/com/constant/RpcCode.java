@@ -1,4 +1,4 @@
-package constant;
+package com.constant;
 
 /**
  * @author ：Qiao Yansong

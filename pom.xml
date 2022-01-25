@@ -55,6 +55,11 @@
             </dependency>
             <dependency>
                 <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-biz</artifactId>
+                <version>${spring-boot-stagging-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
                 <artifactId>spring-boot-stagging-common</artifactId>
                 <version>${spring-boot-stagging-parent.version}</version>
             </dependency>

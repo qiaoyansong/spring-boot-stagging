@@ -1,7 +1,7 @@
 package com.service;
 
 import com.BaseTestApplication;
-import com.util.LogFactory;
+import com.utils.LogFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

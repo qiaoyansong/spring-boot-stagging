@@ -1,6 +1,7 @@
-import param.SayHelloParam;
-import result.RpcResult;
-import result.SayHelloResult;
+package com;
+import com.param.SayHelloParam;
+import com.result.RpcResult;
+import com.result.SayHelloResult;
 
 /**
  * @author ：Qiao Yansong
