@@ -21,12 +21,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>com.qiaoyansong</groupId>
             <artifactId>spring-boot-stagging-setting</artifactId>
-            <version>${spring-boot-stagging-parent.version}</version>
         </dependency>
     </dependencies>
 
@@ -35,6 +33,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.1</version>
             </plugin>
         </plugins>
     </build>

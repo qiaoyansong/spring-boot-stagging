@@ -18,6 +18,35 @@
     </properties>
 
     <dependencyManagement>
+        <dependencies>
+            <!--spring-boot-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--module-->
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-starter</artifactId>
+                <version>${spring-boot-stagging-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-setting</artifactId>
+                <version>${spring-boot-stagging-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qiaoyansong</groupId>
+                <artifactId>spring-boot-stagging-common</artifactId>
+                <version>${spring-boot-stagging-parent.version}</version>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
     <modules>
@@ -28,5 +57,6 @@
         <module>setting</module>
         <module>dal</module>
         <module>integration</module>
+        <module>common</module>
     </modules>
 </project>
