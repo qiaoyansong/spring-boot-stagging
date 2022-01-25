@@ -27,5 +27,6 @@
         <module>service</module>
         <module>setting</module>
         <module>dal</module>
+        <module>integration</module>
     </modules>
 </project>
