@@ -15,7 +15,7 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public SayHelloResult sayHello(SayHelloParam param) {
-        return null;
+        return new SayHelloResult(param.getName() + ",你好");
     }
 
 }

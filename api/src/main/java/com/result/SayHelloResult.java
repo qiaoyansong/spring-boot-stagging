@@ -1,5 +1,6 @@
 package com.result;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * description：
  */
 @Data
+@AllArgsConstructor
 public class SayHelloResult implements Serializable {
 
     private static final long serialVersionUID = -2698243142977067627L;

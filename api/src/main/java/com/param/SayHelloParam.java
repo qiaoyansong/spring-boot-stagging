@@ -1,5 +1,6 @@
 package com.param;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * description：
  */
 @Data
+@AllArgsConstructor
 public class SayHelloParam implements Serializable {
 
     private static final long serialVersionUID = -7963604075112264875L;

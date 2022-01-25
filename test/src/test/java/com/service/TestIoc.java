@@ -1,7 +1,12 @@
 package com.service;
 
 import com.BaseTestApplication;
-import com.utils.LogFactory;
+import com.HelloRpcService;
+import com.constant.RpcCode;
+import com.param.SayHelloParam;
+import com.result.RpcResult;
+import com.result.SayHelloResult;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,10 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestIoc extends BaseTestApplication {
 
     @Autowired
-    private LogFactory logFactory;
+    private HelloRpcService helloRpcService;
 
     @Test
     public void test(){
-        System.out.println(logFactory);
+        RpcResult<SayHelloResult> rpcResult = helloRpcService.sayHello(new SayHelloParam("XXX"));
+        Assert.assertNotNull(rpcResult);
+        Assert.assertEquals(rpcResult.getCode(), RpcCode.SUCCESS);
+        Assert.assertNotNull(rpcResult.getData());
+        System.out.println(rpcResult.getData().getMessage());
     }
 }
