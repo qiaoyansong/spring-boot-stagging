@@ -10,6 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <version>${spring-boot-stagging-api.version}</version>
     <artifactId>spring-boot-stagging-api</artifactId>
 
     <properties>
