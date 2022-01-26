@@ -15,13 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date ：Created in 2022/1/25 6:45 下午
  * description：
  */
-public class TestIoc extends BaseTestApplication {
+public class TestHelloRpcService extends BaseTestApplication {
 
     @Autowired
     private HelloRpcService helloRpcService;
 
     @Test
-    public void test(){
+    public void testSayHello(){
         RpcResult<SayHelloResult> rpcResult = helloRpcService.sayHello(new SayHelloParam("XXX"));
         Assert.assertNotNull(rpcResult);
         Assert.assertEquals(rpcResult.getCode(), RpcCode.SUCCESS);
