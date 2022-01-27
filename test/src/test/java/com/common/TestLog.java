@@ -1,4 +1,4 @@
-package com.common.util;
+package com.common;
 
 import com.BaseTestApplication;
 import com.utils.LogFactory;
@@ -17,7 +17,12 @@ public class TestLog extends BaseTestApplication {
 
     @Test
     public void testGetLog() {
-        serviceLog.info("这是一个测试");
+        serviceLog.info("这是一个测试2");
     }
 
+    @Test
+    public void testWarnAndError() {
+        serviceLog.warn("这是一个测试");
+        serviceLog.error("这是一个测试");
+    }
 }

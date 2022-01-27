@@ -1,19 +1,27 @@
 package com.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.HelloRpcService;
+import com.param.SayHelloParam;
+import com.result.RpcResult;
+import com.result.SayHelloResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author ：Qiao Yansong
  * @date ：Created in 2022/1/25 7:05 下午
  * description：
  */
-@RestController("/hello")
+@RestController
+@RequestMapping("/hello")
 public class HelloController {
 
-    @GetMapping("/say/hello")
-    public String sayHello(){
-        return "hello";
+    @Autowired
+    private HelloRpcService helloRpcService;
+
+    @PostMapping("/say/hello")
+    public RpcResult<SayHelloResult> sayHello(@RequestBody SayHelloParam sayHelloParam){
+        return this.helloRpcService.sayHello(sayHelloParam);
     }
 
 }

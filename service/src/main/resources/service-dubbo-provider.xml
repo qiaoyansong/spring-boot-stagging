@@ -5,10 +5,10 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://dubbo.apache.org/schema/dubbo
+       http://dubbo.apache.org/schema/dubbo 
        http://dubbo.apache.org/schema/dubbo/dubbo.xsd
        ">
 
-<!--    <dubbo:registry id="zkRegistry2" address="${spring.dubbo.registry.address2}" protocol="${dubbo.registry.protocol}"/>-->
-
+    <dubbo:service interface="com.HelloRpcService" ref="helloRpcServiceImpl"
+                   version="${spring.dubbo.provider.version}"/>
 </beans>
