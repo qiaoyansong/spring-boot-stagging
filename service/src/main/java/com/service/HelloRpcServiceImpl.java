@@ -40,7 +40,7 @@ public class HelloRpcServiceImpl implements HelloRpcService {
             log.warn("[HelloRpcServiceImpl#sayHello] bizError, msg={}", e.getMsg());
             return RpcResultUtil.fail(null, e.getCode(), e.getMsg());
         } catch (Exception e) {
-            log.error("[HelloRpcServiceImpl#sayHello] error,e={}", e);
+            log.error("[HelloRpcServiceImpl#sayHello] error,e={}", JSON.toJSONString(e));
             return RpcResultUtil.fail(null, ErrorEnum.INNER_ERROR.getCode(), ErrorEnum.INNER_ERROR.getMsg());
         }
     }

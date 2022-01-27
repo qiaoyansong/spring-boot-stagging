@@ -28,7 +28,6 @@
         <dependency>
             <groupId>com.qiaoyansong</groupId>
             <artifactId>spring-boot-stagging-api</artifactId>
-            <version>${spring-boot-stagging-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

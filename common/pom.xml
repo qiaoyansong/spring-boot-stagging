@@ -71,5 +71,10 @@
             <artifactId>hibernate-validator</artifactId>
             <version>6.0.14.Final</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.5.1</version>
+        </dependency>
     </dependencies>
 </project>
