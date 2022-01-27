@@ -56,6 +56,18 @@
         <filter class="com.log4j.WarnAndErrorFilter"/>
     </appender>
 
+    <!-- [业务] 通用层日志 -->
+    <appender name="commonAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="/tmp/log/common.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+        </layout>
+        <filter class="com.log4j.WarnAndErrorFilter"/>
+    </appender>
+
     <!-- [业务] 防腐层日志 -->
     <appender name="integrationAppender" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="Encoding" value="UTF-8"/>
@@ -95,6 +107,10 @@
     <logger name="bizServiceLogger" additivity="false">
         <level value="INFO"/>
         <appender-ref ref="bizServiceAppender"/>
+    </logger>
+    <logger name="commonLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="commonAppender"/>
     </logger>
     <logger name="integrationLogger" additivity="false">
         <level value="INFO"/>

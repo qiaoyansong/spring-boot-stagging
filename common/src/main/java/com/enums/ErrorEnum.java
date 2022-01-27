@@ -6,7 +6,27 @@ package com.enums;
  * description：错误码枚举
  */
 public enum ErrorEnum {
-    INNER_ERROR(10001, "内部错误");
+    /**
+     * 前置校验
+     */
+    PARAM_ERROR(10001, "参数错误"),
+    PARAM_ERROR_WITH_MSG(10001, "参数错误,%S"),
+
+    /**
+     * 系统错误
+     */
+    INNER_ERROR(20001, "内部错误"),
+    INNER_ERROR_WITH_MSG(20001, "内部错误,错误信息为%s"),
+
+    /**
+     * 业务错误
+     */
+
+    /**
+     * 下游服务调用错误
+     */
+
+    ;
 
     /**
      * 错误代码

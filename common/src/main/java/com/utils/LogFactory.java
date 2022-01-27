@@ -21,6 +21,11 @@ public class LogFactory {
     public static final Logger BIZ_SERVICE_LOG = LoggerFactory.getLogger("bizServiceLogger");
 
     /**
+     * 通用日志
+     */
+    public static final Logger COMMON_LOG = LoggerFactory.getLogger("commonLogger");
+
+    /**
      * 业务日志
      */
     public static final Logger WARN_LOG = LoggerFactory.getLogger("warnLogger");
