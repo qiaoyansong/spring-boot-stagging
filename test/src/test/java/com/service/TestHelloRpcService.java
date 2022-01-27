@@ -22,7 +22,7 @@ public class TestHelloRpcService extends BaseTestApplication {
 
     @Test
     public void testSayHello(){
-        RpcResult<SayHelloResult> rpcResult = helloRpcService.sayHello(new SayHelloParam("XXX"));
+        RpcResult<SayHelloResult> rpcResult = helloRpcService.sayHello(new SayHelloParam(0));
         Assert.assertNotNull(rpcResult);
         Assert.assertEquals(rpcResult.getCode(), RpcCode.SUCCESS);
         Assert.assertNotNull(rpcResult.getData());

@@ -2,11 +2,13 @@ package com.service.tdd;
 
 import com.BaseTddTest;
 import com.constant.RpcCode;
+import com.domain.User;
 import com.param.SayHelloParam;
 import com.result.RpcResult;
 import com.result.SayHelloResult;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * @author ：Qiao Yansong
@@ -15,9 +17,19 @@ import org.junit.Test;
  */
 public class TddHelloRpcService extends BaseTddTest {
 
+
     @Test
     public void testSayHello(){
-        RpcResult<SayHelloResult> rpcResult = helloRpcService.sayHello(new SayHelloParam("XXX"));
+        Mockito.when(userMapper.fetchUserInfo(Mockito.any())).thenAnswer(
+                invocationOnMock -> {
+                    User user = new User();
+                    user.setId(1);
+                    user.setUsername("XXX");
+                    return user;
+                }
+        );
+
+        RpcResult<SayHelloResult> rpcResult = helloRpcService.sayHello(new SayHelloParam(1));
         Assert.assertNotNull(rpcResult);
         Assert.assertEquals(rpcResult.getCode(), RpcCode.SUCCESS);
         Assert.assertNotNull(rpcResult.getData());
