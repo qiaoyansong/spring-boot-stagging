@@ -1,5 +1,6 @@
 # 项目简介
-这是一个springboot脚手架，用于快速的开发springboot项，整个项目使用的是log4j,springboot版本使用的是2.6.1
+这是一个springboot脚手架，用于快速的开发springboot项，整个项目使用的是log4j,springboot版本使用的是2.6.1。
+dubbo是否对外提供服务可以通过dubbo-admin控制台查看，或者使用telnet 127.0.0.1 8083进行查看
 # 项目工程结构如下：
 ```
 ├── api             定义对外的dubbo接口（在线业务调用）
