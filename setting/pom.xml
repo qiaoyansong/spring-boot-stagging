@@ -39,15 +39,15 @@
 
     <!-- 所有使用springboot的项目，打包方式都需要引入此插件进行打包-->
     <build>
-<!--        <resources>-->
-<!--            <resource>-->
-<!--                <directory>setting</directory>-->
-<!--                <includes>-->
-<!--                    <include>**/*.properties</include>-->
-<!--                    <include>**/*.xml</include>-->
-<!--                </includes>-->
-<!--            </resource>-->
-<!--        </resources>-->
+        <resources>
+            <resource>
+                <directory>setting</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
 <!--        <plugins>-->
 <!--            <plugin>-->
 <!--                <groupId>org.springframework.boot</groupId>-->
