@@ -43,7 +43,8 @@
         </dependency>
     </dependencies>
 
-    <!-- 所有使用springboot的项目，打包方式都需要引入此插件进行打包-->
+    <!-- 使用springboot的项目，打包方式都需要引入此插件进行打包-->
+    <!-- 普通jar包和可执行jar包的区别 https://www.jb51.net/article/198349.htm-->
     <build>
         <plugins>
             <plugin>
@@ -53,5 +54,20 @@
             </plugin>
         </plugins>
     </build>
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>${spring-boot-maven-plugin.version}</version>-->
+<!--                <configuration>-->
+<!--    指定启动类，防止有的springboot项目没有启动类使用此插件报错-->
+<!--                    <mainClass>com.Starter</mainClass>-->
+<!--                    <classifier>exec</classifier>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>
