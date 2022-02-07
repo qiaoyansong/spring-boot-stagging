@@ -26,19 +26,19 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-maven-plugin.version}</version>
-                <configuration>
-                    <mainClass>com.Starter</mainClass>
-                    <!-- 可执行jar包的名字，可以参考 https://www.jb51.net/article/198349.htm 加深理解-->
-                    <classifier>exec</classifier>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>${spring-boot-maven-plugin.version}</version>-->
+<!--                <configuration>-->
+<!--                    <mainClass>com.Starter</mainClass>-->
+<!--                    &lt;!&ndash; 可执行jar包的名字，可以参考 https://www.jb51.net/article/198349.htm 加深理解&ndash;&gt;-->
+<!--                    <classifier>exec</classifier>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>
