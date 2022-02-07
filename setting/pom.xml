@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>spring-boot-stagging-setting</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -36,4 +37,27 @@
         </dependency>
     </dependencies>
 
+    <!-- 所有使用springboot的项目，打包方式都需要引入此插件进行打包-->
+    <build>
+        <resources>
+            <resource>
+                <directory>setting</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven-plugin.version}</version>
+                <configuration>
+                    <mainClass>com.Starter</mainClass>
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
