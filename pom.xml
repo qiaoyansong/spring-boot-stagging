@@ -14,7 +14,7 @@
 
     <groupId>com.qiaoyansong</groupId>
     <artifactId>spring-boot-stagging-parent</artifactId>
-    <version>${spring-boot-stagging-parent.version}</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <!--  统一对版本号进行管理 -->
