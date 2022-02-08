@@ -37,6 +37,7 @@
         </dependency>
     </dependencies>
 
+    <!--    springboot需要将对应的配置文件向外暴露，防止配置文件失效 -->
     <build>
         <resources>
             <resource>

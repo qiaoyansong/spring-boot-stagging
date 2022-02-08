@@ -31,3 +31,6 @@ build/
 .vscode/
 
 .DS_Store
+
+### maven版本号管理插件 ###
+.flattened-pom.xml
