@@ -100,6 +100,25 @@
         <appender-ref ref="hotSpotAppender"/>
     </appender>
 
+    <!-- [业务] redis日志，同步打印 -->
+    <appender name="redisAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="/tmp/log/redis.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+        </layout>
+        <filter class="com.log4j.WarnAndErrorFilter"/>
+    </appender>
+
+    <!-- [业务] redis日志，异步打印 -->
+    <appender name="redisAsyncAppender" class="org.apache.log4j.AsyncAppender">
+        <param name="bufferSize" value="8192"/>
+        <param name="blocking" value="false"/>
+        <appender-ref ref="redisAppender"/>
+    </appender>
+
     <logger name="serviceLogger" additivity="false">
         <level value="INFO"/>
         <appender-ref ref="serviceAppender"/>
@@ -131,6 +150,14 @@
     <logger name="hotSpotAsyncLogger" additivity="false">
         <level value="INFO"/>
         <appender-ref ref="hotSpotAsyncAppender"/>
+    </logger>
+    <logger name="redisLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="redisAppender"/>
+    </logger>
+    <logger name="redisAsyncLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="redisAsyncAppender"/>
     </logger>
     <root>
         <level value="INFO"/>

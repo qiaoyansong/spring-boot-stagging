@@ -26,14 +26,24 @@ public class LogFactory {
     public static final Logger COMMON_LOG = LoggerFactory.getLogger("commonLogger");
 
     /**
-     * 业务日志
+     * 警告日志
      */
     public static final Logger WARN_LOG = LoggerFactory.getLogger("warnLogger");
 
     /**
-     * 业务日志
+     * 错误日志
      */
     public static final Logger ERROR_LOG = LoggerFactory.getLogger("errorLogger");
+
+    /**
+     * redis同步日志
+     */
+    public static final Logger REDIS_SYNC_LOG = LoggerFactory.getLogger("redisLogger");
+
+    /**
+     * redis异步日志
+     */
+    public static final Logger REDIS_ASYNC_LOG = LoggerFactory.getLogger("redisAsyncLogger");
 
 
 }

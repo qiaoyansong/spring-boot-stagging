@@ -30,6 +30,7 @@
         <mybatis.generator.version>1.4.0</mybatis.generator.version>
         <lombok.version>1.18.22</lombok.version>
         <spring.version>5.3.13</spring.version>
+        <jedis.version>4.1.1</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +63,12 @@
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo-starter.version}</version>
+            </dependency>
+            <!-- jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
             </dependency>
             <!--module-->
             <dependency>
