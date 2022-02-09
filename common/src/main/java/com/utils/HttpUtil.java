@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
+
 /**
  * @author ：Qiao Yansong
  * @date ：Created in 2022/2/9 4:26 下午
@@ -15,6 +17,11 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class HttpUtil {
 
+    /**
+     * 从配置文件中获取
+     * @see com.config.HttpConfig
+     *
+     */
     @Autowired
     private RestTemplate restTemplate;
 
@@ -25,7 +32,7 @@ public class HttpUtil {
      * @param params 请求参数
      * @return
      */
-    public <T> String get(String url, T params) {
+    public String get(String url, Map<String, Object> params) {
         return get(url, params, null);
     }
 
@@ -37,8 +44,8 @@ public class HttpUtil {
      * @param headers 请求头
      * @return
      */
-    public <T> String get(String url, T params, MultiValueMap<String, String> headers) {
-        return request(url, params, headers, HttpMethod.GET);
+    public String get(String url, Map<String, Object> params, MultiValueMap<String, String> headers) {
+        return request(url, params, headers, HttpMethod.GET, MediaType.APPLICATION_FORM_URLENCODED);
     }
 
     /**
@@ -48,7 +55,7 @@ public class HttpUtil {
      * @param params 请求参数
      * @return
      */
-    public <T> String post(String url, T params) {
+    public String post(String url, String params) {
         return post(url, params, null);
     }
 
@@ -60,24 +67,8 @@ public class HttpUtil {
      * @param headers 请求头
      * @return
      */
-    public <T> String post(String url, T params, MultiValueMap<String, String> headers) {
+    public String post(String url, String params, MultiValueMap<String, String> headers) {
         return request(url, params, headers, HttpMethod.POST, MediaType.APPLICATION_JSON);
-    }
-
-    /**
-     * 表单请求
-     *
-     * @param url
-     * @param params  请求参数
-     * @param headers 请求头
-     * @param method  请求方式
-     * @return
-     */
-    public <T> String request(String url, T params, MultiValueMap<String, String> headers, HttpMethod method) {
-//        if (params == null) {
-//            params = new LinkedMultiValueMap<>();
-//        }
-        return request(url, params, headers, method, MediaType.ALL);
     }
 
     /**
@@ -90,7 +81,7 @@ public class HttpUtil {
      * @param mediaType 参数类型
      * @return
      */
-    public <T> String request(String url, T params, MultiValueMap<String, String> headers, HttpMethod method, MediaType mediaType) {
+    public String request(String url, Object params, MultiValueMap<String, String> headers, HttpMethod method, MediaType mediaType) {
         if (url == null || url.trim().isEmpty()) {
             return null;
         }
@@ -101,7 +92,7 @@ public class HttpUtil {
         }
         // 提交方式：表单、json
         httpHeaders.setContentType(mediaType);
-        HttpEntity<T> httpEntity = new HttpEntity(params, httpHeaders);
+        HttpEntity httpEntity = new HttpEntity(params, httpHeaders);
         ResponseEntity<String> response = restTemplate.exchange(url, method, httpEntity, String.class);
         return response.getBody();
     }

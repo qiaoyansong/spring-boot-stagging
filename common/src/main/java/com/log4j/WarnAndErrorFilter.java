@@ -28,7 +28,13 @@ public class WarnAndErrorFilter extends Filter {
     public int decide(LoggingEvent loggingEvent) {
         Level level;
         if((level = loggingEvent.getLevel()) == Level.ERROR) {
-            errorLog.error((String) loggingEvent.getMessage());
+            String msg = (String) loggingEvent.getMessage();
+            Throwable throwable = loggingEvent.getThrowableInformation().getThrowable();
+            if(throwable != null) {
+                errorLog.error(msg, throwable);
+            }else {
+                errorLog.error(msg);
+            }
             return DENY;
         }else if(level == Level.WARN) {
             warnLog.warn((String) loggingEvent.getMessage());

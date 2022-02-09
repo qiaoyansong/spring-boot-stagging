@@ -24,4 +24,5 @@ public class TestRemoteHelloService extends BaseTestApplication {
         SayHelloResult result = remoteHelloService.sayHello(param);
         System.out.println(result);
     }
+
 }
