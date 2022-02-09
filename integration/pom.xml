@@ -23,6 +23,11 @@
             <groupId>com.qiaoyansong</groupId>
             <artifactId>spring-boot-stagging-common</artifactId>
         </dependency>
+        <!--  调用外部服务 -->
+        <dependency>
+            <groupId>com.qiaoyansong</groupId>
+            <artifactId>spring-boot-stagging-api</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

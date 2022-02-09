@@ -26,6 +26,11 @@ public class LogFactory {
     public static final Logger COMMON_LOG = LoggerFactory.getLogger("commonLogger");
 
     /**
+     * 防腐层日志
+     */
+    public static final Logger INTEGRATION_LOG = LoggerFactory.getLogger("integrationLogger");
+
+    /**
      * 警告日志
      */
     public static final Logger WARN_LOG = LoggerFactory.getLogger("warnLogger");

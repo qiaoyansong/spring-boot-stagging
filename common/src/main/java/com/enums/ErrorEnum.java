@@ -25,7 +25,7 @@ public enum ErrorEnum {
     /**
      * 下游服务调用错误
      */
-
+    DOWNSTREAM_SERVICES_ERROR_WITH_MSG(40001, "调用%s服务错误"),
     ;
 
     /**
