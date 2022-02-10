@@ -70,15 +70,15 @@ public class TestHttpUtil extends BaseTestApplication {
      */
     @Test
     public void testConfigWith1() {
-        try {
-            for (int i = 0; i < 5; i++) {
-                new Thread(() -> {
+        for (int i = 0; i < 5; i++) {
+            new Thread(() -> {
+                try {
                     String result = httpUtil.get(getUrl, null);
                     System.out.println(result);
-                }).start();
-            }
-        } catch (Exception e) {
-            serviceLog.error("[TestHttpUtil#testConfigWith] error, e={}", e);
+                } catch (Exception e) {
+                    serviceLog.error("[TestHttpUtil#testConfigWith] error, e={}", e);
+                }
+            }).start();
         }
     }
 }
