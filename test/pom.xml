@@ -34,6 +34,10 @@
                     <groupId>com.vaadin.external.google</groupId>
                     <artifactId>android-json</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -77,19 +81,46 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- 在 target/site/jacoco-aggregate/index.html 查看jacoco-->
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.3</version>
         </dependency>
     </dependencies>
+    <!--  对于maven clean test 没有执行Junit测试的SOP
+          1. 检查是否有对应的Test注解
+          2. 每个maven项目都有默认的插件 maven - surefire，
+          maven-surefire-plugin的test目标会自动执行测试源码路径（默认为src/test/java/）下所有符合一组命名模式的测试类。这组模式为：
+          **/Test*.java：任何子目录所有命名以Test开头的Java类。
+          **/*Test.java：任何子目录下所有命名以Test结尾的Java类。
+          **/*TestCase.java：任何子目录下所有命名以TestCase结尾的Java类。
+          看是否满足要求，满足要求跳到步骤四
+          3. 如果不满足要求，那么自己重新写一下插件 http://www.pinhuba.com/maven/101212.htm
+          4. 如果经历上述步骤还是不行 那么有可能是jar包冲突问题， 使用 mvn dependency:tree>temp/tree.txt 查看maven依赖树，排除掉冲突的依赖 比如junit4跟Junit5就是冲突的
 
+          额外注意点，即使使用 mvn clean test -Dtest=com.service.tdd.TestTddHelloRpcService 也需要注意
+          对应的测试类必须符合surefire声明的模式才行，否则找不到测试文件
+     -->
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <!--  这后面是覆盖掉原有模式的-->
+                        <include>**/*Test*.groovy</include>
+                        <!--                        <include>**/*Test*.java</include>-->
+                        <include>**/spock/**/*Test*.class</include>
+                    </includes>
+                    <skip>false</skip>
+                </configuration>
             </plugin>
             <plugin>
                 <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin,
@@ -130,21 +161,10 @@
                 <configuration>
                     <!-- 统计哪些的覆盖率 -->
                     <includes>
-                        <include>com/didi/wujie/ims/warehouse/service/*</include>
-                        <include>com/didi/wujie/ims/warehouse/biz/**/*</include>
-                        <include>com/didi/wujie/ims/warehouse/integration/impl/*</include>
+                        <include>com/**/*</include>
                     </includes>
                     <!-- 不统计哪些的覆盖率 -->
                     <excludes>
-                        <exclude>com/didi/wujie/ims/warehouse/starter/**/*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/service/converter/*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/biz/bean/*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/biz/enums/*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/biz/mq/**/*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/biz/context/*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/integration/impl/OldMmsService*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/integration/impl/WarehouseServiceImpl*</exclude>
-                        <exclude>com/didi/wujie/ims/warehouse/integration/impl/WarehouseStockServiceImpl*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

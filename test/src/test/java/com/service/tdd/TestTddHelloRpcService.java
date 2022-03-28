@@ -15,7 +15,7 @@ import org.mockito.Mockito;
  * @date ：Created in 2022/1/26 10:33 上午
  * description：
  */
-public class TddHelloRpcService extends BaseTddTest {
+public class TestTddHelloRpcService extends BaseTddTest {
 
 
     @Test
