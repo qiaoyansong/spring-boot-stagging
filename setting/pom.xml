@@ -48,7 +48,7 @@
         </dependency>
     </dependencies>
 
-    <!--    springboot需要将对应的配置文件向外暴露，防止配置文件失效 -->
+    <!--    springboot需要将对应的配置文件向外暴露，防止配置文件失效 https://blog.csdn.net/u011781521/article/details/79052725 -->
     <build>
         <resources>
             <resource>
