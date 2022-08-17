@@ -1,14 +1,12 @@
 package spock.base
 
-import com.HelloRpcService
+import com.api.HelloRpcService
 import com.mapper.UserMapper
-import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.ComponentScan
-import redis.clients.jedis.Jedis
 import spock.lang.Specification
 
 /**

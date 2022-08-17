@@ -9,6 +9,6 @@
        http://dubbo.apache.org/schema/dubbo/dubbo.xsd
        ">
 
-    <dubbo:service interface="com.HelloRpcService" ref="helloRpcServiceImpl"
+    <dubbo:service interface="com.api.HelloRpcService" ref="helloRpcServiceImpl"
                    version="${spring.dubbo.provider.version}"/>
 </beans>

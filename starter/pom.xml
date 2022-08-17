@@ -63,7 +63,7 @@
 <!--                <version>${spring-boot-maven-plugin.version}</version>-->
 <!--                <configuration>-->
 <!--    指定启动类，防止有的springboot项目没有启动类使用此插件报错-->
-<!--                    <mainClass>com.Starter</mainClass>-->
+<!--                    <mainClass>com.starter.Starter</mainClass>-->
 <!--                    <classifier>exec</classifier>-->
 <!--                </configuration>-->
 <!--            </plugin>-->

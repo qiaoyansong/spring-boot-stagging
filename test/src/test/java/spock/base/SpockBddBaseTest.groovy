@@ -1,6 +1,6 @@
 package spock.base
 
-import com.HelloRpcService
+import com.api.HelloRpcService
 import com.mapper.UserMapper
 import com.service.HelloRpcServiceImpl
 import com.service.HelloService
