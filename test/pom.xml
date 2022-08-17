@@ -88,7 +88,7 @@
             <version>0.8.3</version>
         </dependency>
     </dependencies>
-    <!--  对于maven clean test 没有执行Junit测试的SOP
+    <!--  对于maven clean test 没有执行Junit测试的SOP(需要在根项目下执行)
           1. 检查是否有对应的Test注解
           2. 每个maven项目都有默认的插件 maven - surefire，
           maven-surefire-plugin的test目标会自动执行测试源码路径（默认为src/test/java/）下所有符合一组命名模式的测试类。这组模式为：
