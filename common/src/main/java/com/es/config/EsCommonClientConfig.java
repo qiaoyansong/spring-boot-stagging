@@ -1,5 +1,6 @@
 package com.es.config;
 
+import lombok.Setter;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @date ：Created in 2022/1/27 11:55 上午
  * description：
  */
+@Setter
 @Configuration
 @ConfigurationProperties(prefix = "es")
 public class EsCommonClientConfig {
