@@ -6,21 +6,14 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author ：Qiao Yansong
- * @date ：Created in 2022/1/27 4:46 下午
+ * @date ：Created in 8/17/22 7:17 下午
  * description：
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserInfoDto {
+public class MerchantInfoDto {
 
-    /**
-     * id
-     */
-    private Integer id;
+    private Long merchantId;
 
-    /**
-     * 用户名
-     */
-    private String userName;
 }

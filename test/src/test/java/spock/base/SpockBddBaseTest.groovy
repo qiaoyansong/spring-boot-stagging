@@ -7,10 +7,9 @@ import com.service.HelloService
 import com.service.helper.Do2DtoHelper
 import com.service.impl.HelloServiceImpl
 import com.utils.MockHelper
-import org.junit.Before
+import org.mapstruct.factory.Mappers
 import org.mockito.Mockito
 import spock.lang.Specification
-
 /**
  * @author ：Qiao Yansong
  * @date ：Created in 2022/3/28 23:16
@@ -27,7 +26,7 @@ class SpockBddBaseTest extends Specification {
         // 确定的上下游服务
         helloRpcService = new HelloRpcServiceImpl();
         helloService = new HelloServiceImpl();
-        do2DtoHelper = new Do2DtoHelper();
+        do2DtoHelper = Mappers.getMapper( Do2DtoHelper.class);;
 
         // 不确定的上下游服务，直接mock出来
         userMapper = Mockito.mock(UserMapper.class);

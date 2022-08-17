@@ -29,6 +29,8 @@
         <lombok.version>1.18.22</lombok.version>
         <spring.version>5.3.13</spring.version>
         <jedis.version>4.1.1</jedis.version>
+        <es.version>7.17.5</es.version>
+        <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -67,6 +69,33 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <!-- maven查看 只要client支持当前安装ES版本即可-->
+                <version>${es.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.elasticsearch</groupId>
+                        <artifactId>elasticsearch</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${es.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${org.mapstruct.version}</version>
             </dependency>
             <!--module-->
             <dependency>

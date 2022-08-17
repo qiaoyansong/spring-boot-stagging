@@ -36,8 +36,8 @@ public class HelloServiceImpl implements HelloService {
         SayHelloResult result = new SayHelloResult();
         User user = userMapper.fetchUserInfo(param.getUid());
         if(user != null) {
-            UserInfoDto userInfoDto = do2DtoHelper.transfer(user);
-            result.setMessage(userInfoDto.getUsername() + ",你好");
+            UserInfoDto userInfoDto = do2DtoHelper.toUserInfoDto(user);
+            result.setMessage(userInfoDto.getUserName() + ",你好");
         }
         return result;
     }
