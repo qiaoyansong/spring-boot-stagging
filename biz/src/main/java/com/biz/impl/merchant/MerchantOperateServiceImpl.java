@@ -1,15 +1,16 @@
 package com.biz.impl.merchant;
 
-import com.biz.dto.MerchantInfoDto;
+import com.api.constant.RpcCode;
+import com.biz.merchant.MerchantOperateService;
 import com.common.es.EsWrapper;
 import com.common.es.bean.UpdateDoc;
-import com.biz.merchant.MerchantOperateService;
-import com.common.utils.BeanUtil;
+import com.common.exception.BizException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author ：Qiao Yansong
@@ -26,10 +27,12 @@ public class MerchantOperateServiceImpl implements MerchantOperateService {
     private EsWrapper commonEsWrapper;
 
     @Override
-    public void addMerchant(MerchantInfoDto merchantInfoDto) {
-        Map<String, Object> data = BeanUtil.bean2Map(merchantInfoDto);
-        UpdateDoc updateDoc = new UpdateDoc(merchantInfoDto.getMerchantId().toString(), indexName);
-        updateDoc.setUpdateDoc(data);
+    public void addMerchant(Map<String, Object> merchantInfo, Long merchantId) {
+        if (Objects.isNull(merchantId)) {
+            throw new BizException(RpcCode.SYSTEM_ERROR, "商户ID为空");
+        }
+        UpdateDoc updateDoc = new UpdateDoc(merchantId.toString(), indexName);
+        updateDoc.setUpdateDoc(merchantInfo);
         updateDoc.setDocAsUpsert(true);
         commonEsWrapper.updateAsync(updateDoc);
     }

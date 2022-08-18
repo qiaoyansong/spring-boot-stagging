@@ -31,7 +31,7 @@ public interface MerchantSearchService {
     boolean upsertMerchantDoc(Integer productLine, Long merchantId, Map<String, Object> data);
 
     /**
-     * delete商户所索引
+     * delete商户索引
      *
      * @param productLine productLine
      * @param merchantId  merchantId
@@ -40,7 +40,7 @@ public interface MerchantSearchService {
     boolean deleteMerchantDoc(Integer productLine, Long merchantId);
 
     /**
-     * delete商户所索引
+     * delete商户索引
      *
      * @param productLine productLine
      * @param merchantId  merchantId
@@ -49,7 +49,7 @@ public interface MerchantSearchService {
     boolean deleteMerchantDoc(Integer productLine, Long merchantId,String indexName);
 
     /**
-     * index商户所索引
+     * index商户索引
      *
      * @param productLine productLine
      * @param merchantId  merchantId

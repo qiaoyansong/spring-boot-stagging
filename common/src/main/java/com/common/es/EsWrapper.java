@@ -20,13 +20,13 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.document.DocumentField;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.collapse.CollapseBuilder;
-import org.elasticsearch.xcontent.XContentType;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 /**
@@ -130,12 +129,10 @@ public class EsWrapper {
 
         // 版本冲突最大重试次数
         updateRequest.retryOnConflict(3);
-        CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             esClient.updateAsync(updateRequest, RequestOptions.DEFAULT, new ActionListener<UpdateResponse>() {
                 @Override
                 public void onResponse(UpdateResponse updateResponse) {
-                    countDownLatch.countDown();
                     LOGGER.info("EsWrapper#upsertAsync success, updateDoc:{}, updateResponse = {}", JSON.toJSONString(updateDoc), updateResponse);
                 }
 
@@ -146,11 +143,6 @@ public class EsWrapper {
             });
         } catch (Exception e) {
             LOGGER.error("EsWrapper#upsertAsync failure updateDoc:{}, e:{}", JSON.toJSONString(updateDoc), e.getMessage(), e);
-        }
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         return true;
     }

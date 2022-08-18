@@ -127,12 +127,12 @@ public class MerchantSearchServiceImpl implements MerchantSearchService {
 
     private void setFilter(MerchantSearchParam searchParam, BoolQueryBuilder boolQueryBuilder) {
         // 分为两个分别是需要匹配的 以及需要排除掉的
-        commonEsWrapper.buildFilter(boolQueryBuilder, "market_id", searchParam.getMarketIdList(), null);
-        commonEsWrapper.buildFilter(boolQueryBuilder, "merchant_id", searchParam.getMerchantIdList(), null);
+        commonEsWrapper.buildFilter(boolQueryBuilder, "marketId", searchParam.getMarketIdList(), null);
+        commonEsWrapper.buildFilter(boolQueryBuilder, "merchantId", searchParam.getMerchantIdList(), null);
     }
 
     private void setFuzzy(MerchantSearchParam searchParam, BoolQueryBuilder boolQueryBuilder) {
-        commonEsWrapper.buildFuzzy(boolQueryBuilder, "merchant_name", searchParam.getMerchantName());
+        commonEsWrapper.buildFuzzy(boolQueryBuilder, "merchantName", searchParam.getMerchantName());
     }
 
     private void setRange(MerchantSearchParam searchParam, BoolQueryBuilder boolQueryBuilder) {

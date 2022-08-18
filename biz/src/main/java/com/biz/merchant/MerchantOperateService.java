@@ -1,6 +1,6 @@
 package com.biz.merchant;
 
-import com.biz.dto.MerchantInfoDto;
+import java.util.Map;
 
 /**
  * @author ：Qiao Yansong
@@ -12,8 +12,9 @@ public interface MerchantOperateService {
     /**
      * 添加商户
      *
-     * @param merchantInfoDto
+     * @param merchantInfo 商户信息
+     * @param merchantId   商户IDr
      */
-    void addMerchant(MerchantInfoDto merchantInfoDto);
+    void addMerchant(Map<String, Object> merchantInfo, Long merchantId);
 
 }

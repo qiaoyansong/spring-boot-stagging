@@ -12,7 +12,6 @@ import org.apache.http.nio.conn.ssl.SSLIOSessionStrategy;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.RestHighLevelClientBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +23,7 @@ import java.security.cert.X509Certificate;
 /**
  * @author ：Qiao Yansong
  * @date ：Created in 2022/1/27 11:55 上午
- * description：es网址 ： https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-compatibility.html
+ * description：es网址
  */
 @Setter
 @Configuration
@@ -41,6 +40,16 @@ public class EsCommonClientConfig {
 
     @Bean(name = "commonRestHighLevelClient", destroyMethod = "close")
     public RestHighLevelClient restHighLevelClient() {
+        return new RestHighLevelClient(RestClient.builder(
+                // 新版ES都走的https协议
+                new HttpHost(hostName, Integer.parseInt(port), "http"))
+        );
+    }
+
+    /**
+     * 使用ssl证书创建的客户端，高版本ES 使用https + ssl证书的方式，低版本不需要
+     */
+    public RestHighLevelClient restHighLevelClientCase2() {
         try {
             // ssl证书:
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
@@ -56,7 +65,7 @@ public class EsCommonClientConfig {
             SSLIOSessionStrategy sessionStrategy = new SSLIOSessionStrategy(sslContext, NoopHostnameVerifier.INSTANCE);
             credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userName, password));
 
-            return new RestHighLevelClientBuilder(RestClient.builder(
+            return new RestHighLevelClient(RestClient.builder(
                     // 新版ES都走的https协议
                     new HttpHost(hostName, Integer.parseInt(port), "https"))
                     .setHttpClientConfigCallback(httpAsyncClientBuilder -> {
@@ -64,11 +73,7 @@ public class EsCommonClientConfig {
                         httpAsyncClientBuilder.disableAuthCaching();
                         httpAsyncClientBuilder.setSSLStrategy(sessionStrategy);
                         return httpAsyncClientBuilder;
-                    })
-                    .build())
-                    // 启动兼容模式，可以与es 8.0版本通信
-//                    .setApiCompatibilityMode(true)
-                    .build();
+                    }));
         } catch (Exception e) {
             e.printStackTrace();
         }
