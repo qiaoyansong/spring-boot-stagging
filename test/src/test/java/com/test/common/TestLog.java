@@ -1,7 +1,7 @@
 package com.test.common;
 
 import com.test.BaseTestApplication;
-import com.test.common.utils.LogFactory;
+import com.common.utils.LogFactory;
 import org.junit.Test;
 import org.slf4j.Logger;
 

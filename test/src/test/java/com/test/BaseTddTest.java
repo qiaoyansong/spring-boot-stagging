@@ -1,12 +1,12 @@
 package com.test;
 
 import com.api.HelloRpcService;
-import com.test.dal.mapper.UserMapper;
+import com.dal.mapper.UserMapper;
 import com.test.service.HelloRpcServiceImpl;
-import com.test.service.HelloService;
-import com.test.service.helper.Do2DtoHelper;
-import com.test.service.impl.HelloServiceImpl;
-import com.test.common.utils.MockHelper;
+import com.service.HelloService;
+import com.biz.helper.Do2DtoHelper;
+import com.biz.impl.HelloServiceImpl;
+import com.api.common.utils.MockHelper;
 import lombok.Getter;
 import org.junit.Before;
 import org.mapstruct.factory.Mappers;

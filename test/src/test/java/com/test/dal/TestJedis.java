@@ -1,7 +1,7 @@
 package com.test.dal;
 
 import com.test.BaseTestApplication;
-import com.test.dal.redis.RedisService;
+import com.dal.redis.RedisService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

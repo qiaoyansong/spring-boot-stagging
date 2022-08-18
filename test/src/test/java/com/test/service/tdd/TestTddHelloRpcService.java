@@ -2,7 +2,7 @@ package com.test.service.tdd;
 
 import com.test.BaseTddTest;
 import com.constant.RpcCode;
-import com.test.dal.config.domain.User;
+import com.dal.config.domain.User;
 import com.param.SayHelloParam;
 import com.api.result.RpcResult;
 import com.api.result.SayHelloResult;
