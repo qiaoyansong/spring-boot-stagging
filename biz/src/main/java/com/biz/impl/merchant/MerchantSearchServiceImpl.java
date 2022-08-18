@@ -1,5 +1,7 @@
 package com.biz.impl.merchant;
 
+import com.api.result.merchant.MerchantSearchItem;
+import com.biz.merchant.MerchantSearchService;
 import com.common.es.EsWrapper;
 import com.common.es.bean.DeleteDoc;
 import com.common.es.bean.IndexDoc;
@@ -8,8 +10,6 @@ import com.common.es.bean.UpdateDoc;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.param.merchant.MerchantSearchParam;
-import com.api.result.merchant.MerchantSearchItem;
-import com.biz.merchant.MerchantSearchService;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequest;
@@ -37,8 +37,6 @@ public class MerchantSearchServiceImpl implements MerchantSearchService {
 
     @Resource
     private EsWrapper commonEsWrapper;
-
-    private static final String DEFAULT_TYPE = "type";
 
     private static final List<String> SCRIPT_SORT_KEYS = Arrays.asList("today_order_publish_num", "today_order_finish_num");
 
@@ -93,7 +91,7 @@ public class MerchantSearchServiceImpl implements MerchantSearchService {
         if (productLine == null || merchantId == null || MapUtils.isEmpty(data)) {
             return false;
         }
-        UpdateDoc updateDoc = new UpdateDoc(merchantId.toString(), indexName, DEFAULT_TYPE);
+        UpdateDoc updateDoc = new UpdateDoc(merchantId.toString(), indexName);
         updateDoc.setUpdateDoc(data);
         updateDoc.setDocAsUpsert(true);
         return commonEsWrapper.updateAsync(updateDoc);
@@ -104,7 +102,7 @@ public class MerchantSearchServiceImpl implements MerchantSearchService {
         if (productLine == null || merchantId == null) {
             return false;
         }
-        DeleteDoc deleteDoc = new DeleteDoc(merchantId.toString(), indexName, DEFAULT_TYPE);
+        DeleteDoc deleteDoc = new DeleteDoc(merchantId.toString(), indexName);
         return commonEsWrapper.deleteAsync(deleteDoc);
     }
 
@@ -113,7 +111,7 @@ public class MerchantSearchServiceImpl implements MerchantSearchService {
         if (productLine == null || merchantId == null) {
             return false;
         }
-        DeleteDoc deleteDoc = new DeleteDoc(merchantId.toString(), indexName, DEFAULT_TYPE);
+        DeleteDoc deleteDoc = new DeleteDoc(merchantId.toString(), indexName);
         return commonEsWrapper.deleteAsync(deleteDoc);
     }
 
@@ -122,7 +120,7 @@ public class MerchantSearchServiceImpl implements MerchantSearchService {
         if (productLine == null || merchantId == null || StringUtils.isBlank(data)) {
             return false;
         }
-        IndexDoc indexDoc = new IndexDoc(merchantId.toString(), indexName, DEFAULT_TYPE);
+        IndexDoc indexDoc = new IndexDoc(merchantId.toString(), indexName);
         indexDoc.setIndexDoc(data);
         return commonEsWrapper.indexAsync(indexDoc);
     }

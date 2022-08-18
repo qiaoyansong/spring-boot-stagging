@@ -29,7 +29,9 @@
         <lombok.version>1.18.22</lombok.version>
         <spring.version>5.3.13</spring.version>
         <jedis.version>4.1.1</jedis.version>
-        <es.version>7.17.5</es.version>
+        <!-- https://www.elastic.co/cn/downloads/past-releases/elasticsearch-7-10-2 -->
+        <!-- https://www.elastic.co/cn/downloads/past-releases/kibana-7-10-2 -->
+        <es.version>7.10.2</es.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
     </properties>
 
@@ -80,11 +82,20 @@
                         <groupId>org.elasticsearch</groupId>
                         <artifactId>elasticsearch</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.elasticsearch.client</groupId>
+                        <artifactId>elasticsearch-rest-client</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.elasticsearch</groupId>
                 <artifactId>elasticsearch</artifactId>
+                <version>${es.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId>
                 <version>${es.version}</version>
             </dependency>
             <dependency>

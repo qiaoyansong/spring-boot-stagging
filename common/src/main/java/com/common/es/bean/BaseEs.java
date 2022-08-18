@@ -13,13 +13,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BaseEs {
+
     /**
      * 索引名
      */
     private String indexName;
 
-    /**
-     * type
-     */
-    private String type;
 }

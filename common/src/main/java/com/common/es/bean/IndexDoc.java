@@ -17,7 +17,7 @@ public class IndexDoc extends BaseEsDoc {
      */
     private String indexDoc;
 
-    public IndexDoc(String docId, String indexName, String type) {
-        super(docId, indexName, type);
+    public IndexDoc(String docId, String indexName) {
+        super(docId, indexName);
     }
 }

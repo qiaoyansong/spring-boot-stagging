@@ -17,8 +17,8 @@ public class BaseEsDoc extends BaseEs {
      */
     private String docId;
 
-    public BaseEsDoc(String docId, String indexName, String type) {
-        super(indexName, type);
+    public BaseEsDoc(String docId, String indexName) {
+        super(indexName);
         this.docId = docId;
     }
 }

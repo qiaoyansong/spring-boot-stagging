@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class DeleteDoc extends BaseEsDoc {
 
-    public DeleteDoc(String docId, String indexName, String type) {
-        super(docId, indexName, type);
+    public DeleteDoc(String docId, String indexName) {
+        super(docId, indexName);
     }
 }

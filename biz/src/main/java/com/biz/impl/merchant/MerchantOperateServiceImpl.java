@@ -25,12 +25,10 @@ public class MerchantOperateServiceImpl implements MerchantOperateService {
     @Resource
     private EsWrapper commonEsWrapper;
 
-    private static final String DEFAULT_TYPE = "type";
-
     @Override
     public void addMerchant(MerchantInfoDto merchantInfoDto) {
         Map<String, Object> data = BeanUtil.bean2Map(merchantInfoDto);
-        UpdateDoc updateDoc = new UpdateDoc(merchantInfoDto.getMerchantId().toString(), indexName, DEFAULT_TYPE);
+        UpdateDoc updateDoc = new UpdateDoc(merchantInfoDto.getMerchantId().toString(), indexName);
         updateDoc.setUpdateDoc(data);
         updateDoc.setDocAsUpsert(true);
         commonEsWrapper.updateAsync(updateDoc);

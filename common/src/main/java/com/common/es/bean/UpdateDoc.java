@@ -16,9 +16,17 @@ public class UpdateDoc extends BaseEsDoc {
 
     private Map<String, Object> updateDoc;
 
+    /**
+     * 是否是upsert操作
+     */
     private boolean docAsUpsert;
 
-    public UpdateDoc(String docId, String indexName, String type) {
-        super(docId, indexName, type);
+    /**
+     * 是否是部分更新
+     */
+    private boolean partialUpdate = true;
+
+    public UpdateDoc(String docId, String indexName) {
+        super(docId, indexName);
     }
 }

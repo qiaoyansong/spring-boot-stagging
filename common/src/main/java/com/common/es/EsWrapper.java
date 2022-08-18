@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 /**
@@ -59,7 +60,6 @@ public class EsWrapper {
         searchSourceBuilder.size(MAX_PAGE_SIZE);
         SearchRequest request = new SearchRequest();
         request.indices(baseEs.getIndexName());
-        request.types(baseEs.getType());
         request.source(searchSourceBuilder);
         try {
             SearchResponse response = esClient.search(request, RequestOptions.DEFAULT);
@@ -120,21 +120,22 @@ public class EsWrapper {
      * @return bool
      */
     public boolean updateAsync(UpdateDoc updateDoc) {
-        if (updateDoc == null || updateDoc.getDocId() == null || updateDoc.getIndexName() == null || updateDoc.getType() == null) {
+        if (updateDoc == null || updateDoc.getDocId() == null || updateDoc.getIndexName() == null) {
             return false;
         }
-        UpdateRequest updateRequest = new UpdateRequest(updateDoc.getIndexName(), updateDoc.getType(), updateDoc.getDocId()).doc(updateDoc.getUpdateDoc());
+        UpdateRequest updateRequest = new UpdateRequest(updateDoc.getIndexName(), updateDoc.getDocId()).doc(updateDoc.getUpdateDoc());
         if (updateDoc.isDocAsUpsert()) {
             updateRequest.docAsUpsert(true);
         }
 
         // 版本冲突最大重试次数
         updateRequest.retryOnConflict(3);
-
+        CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             esClient.updateAsync(updateRequest, RequestOptions.DEFAULT, new ActionListener<UpdateResponse>() {
                 @Override
                 public void onResponse(UpdateResponse updateResponse) {
+                    countDownLatch.countDown();
                     LOGGER.info("EsWrapper#upsertAsync success, updateDoc:{}, updateResponse = {}", JSON.toJSONString(updateDoc), updateResponse);
                 }
 
@@ -146,7 +147,11 @@ public class EsWrapper {
         } catch (Exception e) {
             LOGGER.error("EsWrapper#upsertAsync failure updateDoc:{}, e:{}", JSON.toJSONString(updateDoc), e.getMessage(), e);
         }
-
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
@@ -162,7 +167,7 @@ public class EsWrapper {
         }
         BulkRequest bulkRequest = new BulkRequest();
         updateDocs.forEach(updateDoc -> {
-            UpdateRequest updateRequest = new UpdateRequest(updateDoc.getIndexName(), updateDoc.getType(), updateDoc.getDocId()).doc(updateDoc.getUpdateDoc());
+            UpdateRequest updateRequest = new UpdateRequest(updateDoc.getIndexName(), updateDoc.getDocId()).doc(updateDoc.getUpdateDoc());
             if (updateDoc.isDocAsUpsert()) {
                 updateRequest.docAsUpsert(true);
             }
@@ -195,12 +200,11 @@ public class EsWrapper {
      * @return bool
      */
     public boolean indexAsync(IndexDoc indexDoc) {
-        if (indexDoc == null || indexDoc.getDocId() == null || indexDoc.getIndexName() == null || indexDoc.getType() == null ||
-            StringUtils.isBlank(indexDoc.getIndexDoc())) {
+        if (indexDoc == null || indexDoc.getDocId() == null || indexDoc.getIndexName() == null || StringUtils.isBlank(indexDoc.getIndexDoc())) {
             return false;
         }
         IndexRequest indexRequest =
-            new IndexRequest(indexDoc.getIndexName(), indexDoc.getType(), indexDoc.getDocId()).source(indexDoc.getIndexDoc(), XContentType.JSON);
+            new IndexRequest(indexDoc.getIndexName()).id(indexDoc.getDocId()).source(indexDoc.getIndexDoc(), XContentType.JSON);
 
         try {
             esClient.indexAsync(indexRequest, RequestOptions.DEFAULT, new ActionListener<IndexResponse>() {
@@ -228,10 +232,10 @@ public class EsWrapper {
      * @return bool
      */
     public boolean deleteAsync(DeleteDoc deleteDoc) {
-        if (deleteDoc == null || deleteDoc.getDocId() == null || deleteDoc.getIndexName() == null || deleteDoc.getType() == null) {
+        if (deleteDoc == null || deleteDoc.getDocId() == null || deleteDoc.getIndexName() == null) {
             return false;
         }
-        DeleteRequest deleteRequest = new DeleteRequest(deleteDoc.getIndexName(), deleteDoc.getType(), deleteDoc.getDocId());
+        DeleteRequest deleteRequest = new DeleteRequest(deleteDoc.getIndexName(), deleteDoc.getDocId());
 
         try {
             esClient.deleteAsync(deleteRequest, RequestOptions.DEFAULT, new ActionListener<DeleteResponse>() {
