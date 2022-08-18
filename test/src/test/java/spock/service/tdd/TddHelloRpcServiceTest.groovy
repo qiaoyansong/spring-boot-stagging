@@ -1,16 +1,15 @@
 package spock.service.tdd
 
-import com.constant.RpcCode
-import com.domain.User
+import com.api.constant.RpcCode
+import com.api.result.RpcResult
+import com.api.result.SayHelloResult
+import com.dal.domain.User
 import com.param.SayHelloParam
-import com.result.RpcResult
-import com.result.SayHelloResult
 import org.junit.Assert
 import org.mockito.Mockito
 import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
 import spock.base.SpockBddBaseTest
-import spock.lang.Unroll
 
 /**
  * @author ：Qiao Yansong

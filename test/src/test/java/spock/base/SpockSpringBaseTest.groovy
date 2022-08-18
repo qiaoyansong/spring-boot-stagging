@@ -1,7 +1,7 @@
 package spock.base
 
 import com.api.HelloRpcService
-import com.mapper.UserMapper
+import com.dal.mapper.UserMapper
 import org.mockito.Mockito
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,11 +1,11 @@
 package com.test.service;
 
-import com.test.BaseTestApplication;
 import com.api.HelloRpcService;
-import com.constant.RpcCode;
-import com.param.SayHelloParam;
+import com.api.constant.RpcCode;
 import com.api.result.RpcResult;
 import com.api.result.SayHelloResult;
+import com.param.SayHelloParam;
+import com.test.BaseTestApplication;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,9 @@
 package com.test.integration;
 
-import com.test.BaseTestApplication;
-import com.test.integration.bean.SayHelloResult;
+import com.integration.RemoteHelloService;
+import com.integration.bean.SayHelloResult;
 import com.param.SayHelloParam;
+import com.test.BaseTestApplication;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
