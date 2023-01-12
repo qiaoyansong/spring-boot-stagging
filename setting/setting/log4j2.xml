@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+
+    <!--    property配置文件全局属性的声明，使用方式为：${声明的属性名称}。-->
+    <Properties>
+        <Property name="log-path">/tmp/log</Property>
+
+        <Property name="warn-log-file">warn.log</Property>
+        <Property name="error-log-file">error.log</Property>
+        <Property name="default-log-file">default.log</Property>
+        <Property name="service-log-file">service.log</Property>
+        <Property name="biz-service-log-file">biz-service.log</Property>
+        <Property name="common-log-file">common.log</Property>
+        <Property name="integration-log-file">integration.log</Property>
+        <Property name="hotspot-log-file">hotspot.log</Property>
+        <Property name="redis-log-file">redis.log</Property>
+
+    </Properties>
+
+    <Appenders>
+
+        <!--
+        Console节点用来定义输出到控制台的Appender
+        name:指定Appender的名字.
+        target:SYSTEM_OUT 或 SYSTEM_ERR,一般只设置默认:SYSTEM_OUT.
+        PatternLayout:输出格式，不设置默认为:%m%n.
+        File节点用来定义输出到指定位置的文件的Appender.
+
+        # 设置输出的格式 pattern
+        %p：输出日志信息的优先级，即DEBUG，INFO，WARN，ERROR，FATAL。
+        %d：输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，如：%d{yyyy/MM/dd HH:mm:ss,SSS}。
+        %m:：输出代码中指定的具体日志信息。
+        %n：输出一个回车换行符，Windows平台为"\r\n"，Unix平台为"\n"。
+        %i：表示按照大小滚动,超过大小则滚动，每滚动一次则filePattern中的配置%i的值会加
+        -->
+        <Console name="console" target="SYSTEM_OUT">
+            <!--
+            日志格式最好使用自己实现的Layout类定义，而不要使用PatternLayout。因为开启异步打印日志后，使用PatternLayout可能导致每次flush的最后一行日志只输出前半部分(后半部分会在下次flush时输出)，
+            虽然最终日志是完整的，但这会导致把脉采集到的日志看起来是截断的；而使用自定义的Layout类(扩展AbstractStringLayout)输出的日志总是整行(这与PatternLayout的实现机制有关，
+            有兴趣可以debug看看log4j2源码)。
+            -->
+            <!--            可以参考bd-work-center的实现-->
+            <!--            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>-->
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+        </Console>
+
+        <!-- [业务日志] warn.log, 汇总所有WARN日志 -->
+        <RollingRandomAccessFile name="warnAppender" fileName="${log-path}/${warn-log-file}" immediateFlush="true"
+                                 filePattern="${log-path}/${warn-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!-- [业务日志] error.log, 汇总所有ERROR日志 -->
+        <RollingRandomAccessFile name="errorAppender" fileName="${log-path}/${error-log-file}" immediateFlush="true"
+                                 filePattern="${log-path}/${error-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!--
+       业务日志 default.log
+       name:指定Appender的名字.
+       fileName 指定当前日志文件的位置和文件名称
+       filePattern 指定当发生Rolling时，文件的转移和重命名规则 比如当前时间是2023-01-03，2023-01-02的default.log就会进行一次rolling，变为default.log.2022-01-02
+       immediateFlush log4j2接收到日志事件时，是否立即将日志刷到磁盘。默认为true。
+       -->
+        <RollingRandomAccessFile name="defaultAppender" fileName="${log-path}/${default-log-file}" immediateFlush="true"
+                                 filePattern="${log-path}/${default-log-file}.%d{yyyy-MM-dd}">
+            <!--
+            表示打印info级别以上的，该ThresholdFilter的操作表示对info级别以及以上的同意打印，不匹配的拒绝打印
+            level，表示最低接受的日志级别，博客配置的为INFO，即我们期望打印INFO级别以上的日志。
+            onMatch，表示当日志事件的日志级别与level一致时，应怎么做。一般为ACCEPT，表示接受。
+            onMismatch，表示日志事件的日志级别与level不一致时，应怎么做。一般为DENY，表示拒绝。也可以为NEUTRAL表示中立。
+            -->
+            <!--            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />-->
+
+            <!--
+           日志格式最好使用自己实现的Layout类定义，而不要使用PatternLayout。因为开启异步打印日志后，使用PatternLayout可能导致每次flush的最后一行日志只输出前半部分(后半部分会在下次flush时输出)，
+           虽然最终日志是完整的，但这会导致把脉采集到的日志看起来是截断的；而使用自定义的Layout类(扩展AbstractStringLayout)输出的日志总是整行(这与PatternLayout的实现机制有关，
+           有兴趣可以debug看看log4j2源码)。
+           -->
+            <!--            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>-->
+
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <!--
+                     TimeBasedTriggeringPolicy 这个配置需要和filePattern结合使用
+                     注意filePattern中配置的文件重命名规则是${log-path}/${default-log-file}.%d{yyyy-MM-dd}，最小的时间粒度是dd，即天。
+                     TimeBasedTriggeringPolicy指定的size是1，结合起来就是每1天生成一个新文件。
+                     如果改成${log-path}/${default-log-file}.%d{yyyy-MM-dd-HH}，最小粒度为小时，则每一个小时生成一个文件。
+                 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--
+                    指定当文件体积大于size指定的值时，触发Rolling
+                -->
+                <!--  <SizeBasedTriggeringPolicy size="10 MB" /> -->
+            </Policies>
+            <Filters>
+                <Log4j2WarnAndErrorFilter/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!-- [业务] 服务层日志 -->
+        <RollingRandomAccessFile name="serviceAppender" fileName="${log-path}/${service-log-file}" immediateFlush="true"
+                                 filePattern="${log-path}/${service-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <Log4j2WarnAndErrorFilter/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!-- [业务] 服务层日志 -->
+        <RollingRandomAccessFile name="bizServiceAppender" fileName="${log-path}/${biz-service-log-file}"
+                                 immediateFlush="true"
+                                 filePattern="${log-path}/${biz-service-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <Log4j2WarnAndErrorFilter/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!-- [业务] 通用层日志 -->
+        <RollingRandomAccessFile name="commonAppender" fileName="${log-path}/${common-log-file}"
+                                 immediateFlush="true"
+                                 filePattern="${log-path}/${common-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <Log4j2WarnAndErrorFilter/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!-- [业务] 防腐层日志 -->
+        <RollingRandomAccessFile name="integrationAppender" fileName="${log-path}/${integration-log-file}"
+                                 immediateFlush="true"
+                                 filePattern="${log-path}/${integration-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <!--
+                      TimeBasedTriggeringPolicy 这个配置需要和filePattern结合使用
+                      注意filePattern中配置的文件重命名规则是${log-path}/${default-log-file}.%d{yyyy-MM-dd}，最小的时间粒度是dd，即天。
+                      TimeBasedTriggeringPolicy指定的size是1，结合起来就是每1天生成一个新文件。
+                      如果改成${log-path}/${default-log-file}.%d{yyyy-MM-dd-HH}，最小粒度为小时，则每一个小时生成一个文件。
+                  -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--
+                    指定当文件体积大于size指定的值时，触发Rolling
+                -->
+                <!--  <SizeBasedTriggeringPolicy size="10 MB" /> -->
+            </Policies>
+            <Filters>
+                <Log4j2WarnAndErrorFilter/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!-- [业务] 热点日志 -->
+        <RollingRandomAccessFile name="hotSpotLogger" fileName="${log-path}/${hotspot-log-file}"
+                                 immediateFlush="true"
+                                 filePattern="${log-path}/${hotspot-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <Log4j2WarnAndErrorFilter/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!-- [业务] redis日志 -->
+        <RollingRandomAccessFile name="redisLogger" fileName="${log-path}/${redis-log-file}"
+                                 immediateFlush="true"
+                                 filePattern="${log-path}/${redis-log-file}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <Log4j2WarnAndErrorFilter/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- Root节点用来指定项目的根日志，如果没有单独指定Logger，那么就会默认使用该Root日志输出 -->
+        <!--
+            level:定义日志等级，只有大于等于该等级的日志才会打印。日志等级有ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF。
+            appender-ref：定义输出源，一个Logger可以绑定多个输出源。
+            name：logger的名，在程序中调用getLogger（“logger_name”)时会根据logger_name匹配打印器，该函数会返回一个名字最匹配的打印器。一般都是和包名、类名相关的打印器名，这样在打印日志时可以携带一些类、包名，很方便定位问题。
+            additivity：表示Logger不会在父Logger的appender里输出，默认为true。
+        -->
+        <Root level="info" includeLocation="true">
+            <AppenderRef ref="defaultAppender"/>
+        </Root>
+
+        <!-- 警告 -->
+        <logger name="warnLogger" level="warn" additivity="false">
+            <appender-ref ref="warnAppender"/>
+        </logger>
+
+        <logger name="errorLogger" level="error" additivity="false">
+            <appender-ref ref="errorAppender"/>
+        </logger>
+
+        <logger name="serviceLogger" level="info" additivity="false">
+            <appender-ref ref="serviceAppender"/>
+        </logger>
+
+        <logger name="bizServiceLogger" level="info" additivity="false">
+            <appender-ref ref="bizServiceAppender"/>
+        </logger>
+
+        <logger name="commonLogger" level="info" additivity="false">
+            <appender-ref ref="commonAppender"/>
+        </logger>
+
+        <logger name="integrationLogger" level="info" additivity="false">
+            <appender-ref ref="integrationAppender"/>
+        </logger>
+
+        <!-- 特别注意log4j2Async Logger 使用disruptor框架实现 因此需要引入 disruptor-->
+        <AsyncLogger name="hotSpotLogger" level="info" additivity="false">
+            <appender-ref ref="hotSpotAppender"/>
+        </AsyncLogger>
+
+        <!-- 特别注意log4j2Async Logger 使用disruptor框架实现 因此需要引入 disruptor-->
+        <AsyncLogger name="redisLogger" level="info" additivity="false">
+            <appender-ref ref="redisAppender"/>
+        </AsyncLogger>
+
+    </Loggers>
+
+</Configuration>

@@ -33,6 +33,9 @@
         <!-- https://www.elastic.co/cn/downloads/past-releases/kibana-7-10-2 -->
         <es.version>7.10.2</es.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
+        <log4j2.version>2.19.0</log4j2.version>
+        <log4j-over-slf4j.version>1.7.36</log4j-over-slf4j.version>
+        <disruptor.version>3.4.4</disruptor.version>
     </properties>
 
     <dependencyManagement>
@@ -55,10 +58,41 @@
                 <scope>test</scope>
             </dependency>
             <!-- log4j -->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-log4j</artifactId>-->
+<!--                <version>1.3.8.RELEASE</version>-->
+<!--            </dependency>-->
+            <!-- log4j2 -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-log4j</artifactId>
-                <version>1.3.8.RELEASE</version>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jul</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>${log4j-over-slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
             </dependency>
             <!--dubbo-starter-->
             <dependency>

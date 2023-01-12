@@ -19,9 +19,7 @@ public class RedisServiceImpl implements RedisService {
     @Autowired
     private JedisPool jedisPool;
 
-    private static final Logger REDIS_SYNC_LOG = LogFactory.REDIS_SYNC_LOG;
-
-    private static final Logger REDIS_ASYNC_LOG = LogFactory.REDIS_ASYNC_LOG;
+    private static final Logger REDIS_SYNC_LOG = LogFactory.REDIS_LOGGER;
 
     @Override
     public boolean set(String key, String value){
@@ -36,7 +34,7 @@ public class RedisServiceImpl implements RedisService {
     public String get(String key) {
         try(Jedis jedis = jedisPool.getResource()){
             String result = jedis.get(key);
-            REDIS_ASYNC_LOG.info("[RedisServiceImpl#get] key={}, result={}", key, result);
+            REDIS_SYNC_LOG.info("[RedisServiceImpl#get] key={}, result={}", key, result);
             return result;
         }
     }

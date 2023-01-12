@@ -41,14 +41,8 @@ public class LogFactory {
     public static final Logger ERROR_LOG = LoggerFactory.getLogger("errorLogger");
 
     /**
-     * redis同步日志
+     * redis日志
      */
-    public static final Logger REDIS_SYNC_LOG = LoggerFactory.getLogger("redisLogger");
-
-    /**
-     * redis异步日志
-     */
-    public static final Logger REDIS_ASYNC_LOG = LoggerFactory.getLogger("redisAsyncLogger");
-
+    public static final Logger REDIS_LOGGER = LoggerFactory.getLogger("redisLogger");
 
 }
