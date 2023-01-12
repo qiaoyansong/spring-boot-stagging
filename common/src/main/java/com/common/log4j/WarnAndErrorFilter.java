@@ -4,7 +4,10 @@ import com.common.utils.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.Filter;
 import org.apache.log4j.spi.LoggingEvent;
+import org.apache.log4j.spi.ThrowableInformation;
 import org.slf4j.Logger;
+
+import java.util.Objects;
 
 /**
  * @author ：Qiao Yansong
@@ -24,21 +27,27 @@ public class WarnAndErrorFilter extends Filter {
     private static final Logger warnLog = LogFactory.WARN_LOG;
 
 
+
     @Override
     public int decide(LoggingEvent loggingEvent) {
         Level level;
         if((level = loggingEvent.getLevel()) == Level.ERROR) {
             String msg = (String) loggingEvent.getMessage();
-            Throwable throwable = loggingEvent.getThrowableInformation().getThrowable();
-            if(throwable != null) {
-                errorLog.error(msg, throwable);
-            }else {
+            ThrowableInformation throwableInformation = loggingEvent.getThrowableInformation();
+            if (Objects.nonNull(throwableInformation)) {
+                Throwable throwable = throwableInformation.getThrowable();
+                if (Objects.nonNull(throwable)) {
+                    errorLog.error(msg, throwable);
+                } else {
+                    errorLog.error(msg);
+                }
+            } else {
                 errorLog.error(msg);
             }
-            return DENY;
+            return ACCEPT;
         }else if(level == Level.WARN) {
             warnLog.warn((String) loggingEvent.getMessage());
-            return DENY;
+            return ACCEPT;
         }else {
             return ACCEPT;
         }
