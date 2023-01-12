@@ -173,7 +173,7 @@
         </RollingRandomAccessFile>
 
         <!-- [业务] 热点日志 -->
-        <RollingRandomAccessFile name="hotSpotLogger" fileName="${log-path}/${hotspot-log-file}"
+        <RollingRandomAccessFile name="hotSpotAppender" fileName="${log-path}/${hotspot-log-file}"
                                  immediateFlush="true"
                                  filePattern="${log-path}/${hotspot-log-file}.%d{yyyy-MM-dd}">
             <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
@@ -186,7 +186,7 @@
         </RollingRandomAccessFile>
 
         <!-- [业务] redis日志 -->
-        <RollingRandomAccessFile name="redisLogger" fileName="${log-path}/${redis-log-file}"
+        <RollingRandomAccessFile name="redisAppender" fileName="${log-path}/${redis-log-file}"
                                  immediateFlush="true"
                                  filePattern="${log-path}/${redis-log-file}.%d{yyyy-MM-dd}">
             <PatternLayout pattern="[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n"/>
