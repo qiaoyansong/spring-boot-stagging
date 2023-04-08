@@ -3,19 +3,31 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <context id="mysql" defaultModelType="hierarchical" targetRuntime="MyBatis3Simple">
+    <context defaultModelType="flat" id="mysqlTables" targetRuntime="MyBatis3">
+
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+       一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖
+      -->
+        <property name="autoDelimitKeywords" value="false"/>
         <!-- 生成的Java文件的编码 -->
         <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
         <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
+        <property name="suppressJavaInterface" value="false"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
         <!-- 注释生成器 -->
         <commentGenerator>
-            <!-- 是否去除entity自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressDate" value="false"/>
             <!-- 是否去除自动mapper文件生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+            <!-- 是否去除entity自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressDate" value="true"/>
         </commentGenerator>
 
         <!-- 必须要有的，使用这个配置链接数据库 @TODO:是否可以扩展 以下为数据库连接的四要素-->
@@ -23,6 +35,7 @@
                         connectionURL="jdbc:mysql://localhost:3306/test?serverTimeZone=GMT"
                         userId="root"
                         password="qiao683586890">
+            <property name ="nullCatalogMeansCurrent" value = "true"/>
         </jdbcConnection>
 
         <!-- 生成domain对象 -->
@@ -30,8 +43,20 @@
             <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
 
+        <!--对应的xml mapper文件  -->
+        <sqlMapGenerator targetPackage="com.dal.mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 对应的dao接口 -->
+        <javaClientGenerator targetPackage="com.dal.mapper"  targetProject="src/main/java"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
         <!-- ===========================表名=================================================== -->
-        <table tableName="user" delimitIdentifiers="true" domainObjectName="User">
+        <table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false" enableDeleteByExample="false"
+               selectByExampleQueryId="false"  enableInsert="true" enableCountByExample="false" enableSelectByExample="false">
             <!--使用真实列的名字 false不使用（默认 如果有下划线转为驼峰） true使用-->
             <property name="useActualColumnNames" value="false"/>
         </table>
