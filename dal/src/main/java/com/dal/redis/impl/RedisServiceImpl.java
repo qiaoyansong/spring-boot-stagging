@@ -39,4 +39,22 @@ public class RedisServiceImpl implements RedisService {
         }
     }
 
+    @Override
+    public long expire(String key, long seconds) {
+        try(Jedis jedis = jedisPool.getResource()){
+            long result = jedis.expire(key, seconds);
+            REDIS_SYNC_LOG.info("[RedisServiceImpl#expire] key={} seconds={}, result={}", key, seconds, result);
+            return result;
+        }
+    }
+
+    @Override
+    public long incr(String key) {
+        try(Jedis jedis = jedisPool.getResource()){
+            long result = jedis.incr(key);
+            REDIS_SYNC_LOG.info("[RedisServiceImpl#incr] key={}, result={}", key, result);
+            return result;
+        }
+    }
+
 }

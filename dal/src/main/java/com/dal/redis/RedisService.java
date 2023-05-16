@@ -23,4 +23,19 @@ public interface RedisService {
      */
     String get(String key);
 
+    /**
+     * 设置过期时间
+     *
+     * @param key
+     * @param seconds
+     * @return
+     */
+    long expire(String key, long seconds);
+
+    /**
+     * 自增
+     *
+     * @param key
+     */
+    long incr(String key);
 }
