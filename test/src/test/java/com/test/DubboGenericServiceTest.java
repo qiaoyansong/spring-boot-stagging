@@ -16,6 +16,7 @@ public class DubboGenericServiceTest {
     private static final String zk      = "zookeeper://127.0.0.1:2181";
     private static final String version = "1.0.0_sim";
 
+    // 如果是企业级系统调用的话，一般会设置interfaceName维度的ReferenceConfig缓存，用于避免开销问题
     public static Object callGenericService(String interfaceName, String methodName, String[] parameterTypes,
                                             Object[] args) {
 
@@ -33,6 +34,8 @@ public class DubboGenericServiceTest {
         reference.setVersion(version);
         reference.setTimeout(10000);
         reference.setGeneric(true);
+//        reference.setFilter("");
+//        reference.setRetries(0);
 
         GenericService genericService = reference.get();
 
@@ -52,7 +55,6 @@ public class DubboGenericServiceTest {
 
         Object[] paramValues = new Object[] { param};
         Object result = callGenericService(name, method, paramTypes, paramValues);
-        System.out.println("==============");
         System.out.println(JSON.toJSONString(result));
     }
 }
