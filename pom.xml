@@ -188,6 +188,7 @@
 
     <modules>
         <module>api</module>
+        <module>api-mis</module>
         <module>starter</module>
         <module>service</module>
         <module>setting</module>
