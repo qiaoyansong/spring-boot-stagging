@@ -1,6 +1,6 @@
 package com.api;
 import com.param.SayHelloParam;
-import com.api.result.RpcResult;
+import com.common.rpc.RpcResult;
 import com.api.result.SayHelloResult;
 
 /**

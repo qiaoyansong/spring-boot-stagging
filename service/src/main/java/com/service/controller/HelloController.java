@@ -2,7 +2,7 @@ package com.service.controller;
 
 import com.api.HelloRpcService;
 import com.param.SayHelloParam;
-import com.api.result.RpcResult;
+import com.common.rpc.RpcResult;
 import com.api.result.SayHelloResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

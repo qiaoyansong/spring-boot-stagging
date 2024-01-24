@@ -1,7 +1,7 @@
 package spock.service.tdd
 
 import com.api.constant.RpcCode
-import com.api.result.RpcResult
+import com.common.rpc.RpcResult
 import com.api.result.SayHelloResult
 import com.dal.domain.User
 import com.param.SayHelloParam

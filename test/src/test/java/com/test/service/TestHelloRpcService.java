@@ -2,7 +2,7 @@ package com.test.service;
 
 import com.api.HelloRpcService;
 import com.api.constant.RpcCode;
-import com.api.result.RpcResult;
+import com.common.rpc.RpcResult;
 import com.api.result.SayHelloResult;
 import com.param.SayHelloParam;
 import com.test.BaseTestApplication;
