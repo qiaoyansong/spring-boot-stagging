@@ -2,7 +2,7 @@ package com.integration.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.api.constant.RpcCode;
-import com.api.result.RpcResult;
+import com.common.rpc.RpcResult;
 import com.common.enums.ErrorEnum;
 import com.common.exception.BizException;
 import com.common.utils.HttpUtil;

@@ -2,7 +2,7 @@ package com.service;
 
 import com.alibaba.fastjson.JSON;
 import com.api.HelloRpcService;
-import com.api.result.RpcResult;
+import com.common.rpc.RpcResult;
 import com.api.result.SayHelloResult;
 import com.api.utils.RpcResultUtil;
 import com.biz.service.HelloService;

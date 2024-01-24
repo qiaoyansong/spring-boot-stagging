@@ -1,8 +1,10 @@
-package com.api.result;
+package com.common.rpc;
 
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ：Qiao Yansong
@@ -19,6 +21,8 @@ public class RpcResult<T> implements Serializable {
     private int code;
 
     private String msg;
+
+    private Map<String, String> attachments = new HashMap();
 
 }
 

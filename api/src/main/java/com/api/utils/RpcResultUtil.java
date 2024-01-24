@@ -1,7 +1,7 @@
 package com.api.utils;
 
 import com.api.constant.RpcCode;
-import com.api.result.RpcResult;
+import com.common.rpc.RpcResult;
 
 /**
  * @author ：Qiao Yansong
