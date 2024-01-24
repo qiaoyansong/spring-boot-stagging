@@ -5,7 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.constant.CommonConstant.*;
+import static com.common.constant.CommonConstant.*;
+
 
 /**
  * @author ：Qiao Yansong

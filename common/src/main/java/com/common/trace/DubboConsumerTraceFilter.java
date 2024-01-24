@@ -11,8 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.constant.CommonConstant.KEY_REVERSE_PARAM_PREFIX;
-import static com.constant.CommonConstant.TRACE_BIZ_BAGGAGE_PREFIX;
+import static com.common.constant.CommonConstant.KEY_REVERSE_PARAM_PREFIX;
+import static com.common.constant.CommonConstant.TRACE_BIZ_BAGGAGE_PREFIX;
 
 /**
  * @author ：Qiao Yansong
